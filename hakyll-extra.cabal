@@ -1,0 +1,28 @@
+name:                hakyll-extra
+version:             0.1.0.0
+synopsis:            A bunch of extra functionality for Hakyll-based sites.
+description:         Please see README.md
+homepage:            https://github.com/beerendlauwers/hakyll-extra
+license:             BSD3
+license-file:        LICENSE
+author:              Beerend Lauwers
+maintainer:          beerendlauwers@gmail.com
+copyright:           2015 Beerend Lauwers
+category:            Web
+build-type:          Simple
+-- extra-source-files:
+cabal-version:       >=1.10
+
+library
+  hs-source-dirs:      src
+  exposed-modules:     Hakyll.Core.Rules.Extra,
+                       Hakyll.Core.Identifier.Pattern.Extra,
+                       Hakyll.Web.Template.Context.Extra
+  build-depends:       base >= 4.7 && < 5,
+                       hakyll >= 4.6 && < 4.8
+  default-language:    Haskell2010
+
+
+source-repository head
+  type:     git
+  location: https://github.com/githubuser/hakyll-extra

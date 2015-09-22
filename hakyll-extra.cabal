@@ -28,4 +28,4 @@ library
 
 source-repository head
   type:     git
-  location: https://github.com/githubuser/hakyll-extra
+  location: https://github.com/beerendlauwers/hakyll-extra

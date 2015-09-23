@@ -4,7 +4,6 @@ synopsis:            A bunch of extra functionality for Hakyll-based sites.
 description:         Please see README.md
 homepage:            https://github.com/beerendlauwers/hakyll-extra
 license:             BSD3
-license-file:        LICENSE
 author:              Beerend Lauwers
 maintainer:          beerendlauwers@gmail.com
 copyright:           2015 Beerend Lauwers
@@ -18,11 +17,17 @@ library
   exposed-modules:     Hakyll.Core.Rules.Extra,
                        Hakyll.Core.Identifier.Pattern.Extra,
                        Hakyll.Web.Template.Context.Extra,
-                       Hakyll.Core.Util.JSON
+                       Hakyll.Core.Util.JSON,
+                       Hakyll.Translation,
+                       Hakyll.Translation.Types,
+                       Hakyll.Translation.Format.Metadata,
+                       Hakyll.Translation.Examples.Directories
   build-depends:       base >= 4.7 && < 5,
                        hakyll >= 4.6 && < 4.8,
                        aeson >= 0.7 && < 0.9,
-                       utf8-string == 1.*
+                       utf8-string == 1.*,
+                       containers == 0.5.*,
+                       filepath == 1.3.*
   default-language:    Haskell2010
 
 

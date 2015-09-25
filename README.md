@@ -22,3 +22,13 @@ This repo can built with [Stack](https://github.com/commercialhaskell/stack#read
 ### Hakyll.Web.Template.Context.Extra
 
 * `relativizeUrl :: Context a`: Allows you to call `$relativizeUrl("/url/to/relativize")$` in a template. [See this blogpost for more details](http://beerendlauwers.be/posts/2015-09-21-hakylls-functionfield.html).
+
+### Hakyll.Translation
+
+* `translationToContext :: [Translation] -> Context a`: iven a list of translations, builds up a context of fields, one for each translation. The metadata key name is appended with "translation.".
+
+### Hakyll.Translation.Format.Metadata
+
+* `loadTranslationsFromMetadata :: Pattern -> Language -> Compiler (Item [(Identifier, Metadata)])`: Given a pattern, gets all the metadata values from every item that matches the pattern.
+*  `collectMetadataTranslations :: [Metadata] -> [Translation]`: Given a list of metadata, appends them all together and places them in a map-like structure.
+*  `createTranslationContextFromMetaData :: Pattern -> Language -> Compiler (Context a)`: Given a pattern and a language, will produce a Context with translations in them for that language. See [Hakyll.Translation.Examples.Directories](https://github.com/beerendlauwers/hakyll-extra/blob/master/src/Hakyll/Translation/Examples/Directories.hs) for a complete example.

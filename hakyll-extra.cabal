@@ -21,7 +21,8 @@ library
                        Hakyll.Translation,
                        Hakyll.Translation.Types,
                        Hakyll.Translation.Format.Metadata,
-                       Hakyll.Translation.Examples.Directories
+                       Hakyll.Translation.Examples.Directories,
+                       Hakyll.Translation.Examples.AllLanguages
   build-depends:       base >= 4.7 && < 5,
                        hakyll >= 4.6 && < 4.8,
                        aeson >= 0.7 && < 0.9,

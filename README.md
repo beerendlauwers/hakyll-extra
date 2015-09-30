@@ -21,14 +21,18 @@ This repo can built with [Stack](https://github.com/commercialhaskell/stack#read
 
 ### Hakyll.Web.Template.Context.Extra
 
+* `optionalField :: String -> (Item a -> Maybe (Compiler String)) -> Context a`: See [commit by @wrengr](https://github.com/wrengr/hakyll/commit/558bc6d1efe86dc9ad501eaa100c0af020e2ef2a).
 * `relativizeUrl :: Context a`: Allows you to call `$relativizeUrl("/url/to/relativize")$` in a template. [See this blogpost for more details](http://beerendlauwers.be/posts/2015-09-21-hakylls-functionfield.html).
+* `applyToTemplate :: Context a`: A `functionField` that takes a template path as its first argument, and an unlimited number of named arguments. It will then load the template and pass the named arguments as template variables. [See the definition for a usage example.](https://github.com/beerendlauwers/hakyll-extra/blob/master/src/Hakyll/Web/Template/Context/Extra.hs)
 
 ### Hakyll.Translation
 
 * `translationToContext :: [Translation] -> Context a`: iven a list of translations, builds up a context of fields, one for each translation. The metadata key name is appended with "translation.".
+* `translationsToContextFunctionField :: [(Language,[Translation])] -> Context a`: Given a list of lists of translations, produces a $functionField$ that expects a language and a translation key. You can use it in a template like this: `$translationFor("language","key")$`
 
 ### Hakyll.Translation.Format.Metadata
 
-* `loadTranslationsFromMetadata :: Pattern -> Language -> Compiler (Item [(Identifier, Metadata)])`: Given a pattern, gets all the metadata values from every item that matches the pattern.
+* `loadTranslationsFromMetadata :: (MonadMetadata m) => Pattern -> Language -> m ([(Identifier, Metadata)])`: Given a pattern, gets all the metadata values from every item that matches the pattern.
 *  `collectMetadataTranslations :: [Metadata] -> [Translation]`: Given a list of metadata, appends them all together and places them in a map-like structure.
-*  `createTranslationContextFromMetaData :: Pattern -> Language -> Compiler (Context a)`: Given a pattern and a language, will produce a Context with translations in them for that language. See [Hakyll.Translation.Examples.Directories](https://github.com/beerendlauwers/hakyll-extra/blob/master/src/Hakyll/Translation/Examples/Directories.hs) for a complete example.
+*  `createTranslationContextFromMetaData :: (MonadMetadata m) => Pattern -> Language -> m (Context a)`: Given a pattern and a language, will produce a Context with translations in them for that language. See [Hakyll.Translation.Examples.Directories](https://github.com/beerendlauwers/hakyll-extra/blob/master/src/Hakyll/Translation/Examples/Directories.hs) for a complete example.
+*  `loadAllTranslationsFromMetadata :: (MonadMetadata m) => Pattern -> [Language] -> m ([(Language,[Translation])])`: Given a pattern and a list of languages, will produce a list of (language,translations) tuples. See [Hakyll.Translation.Examples.AllLanguages](https://github.com/beerendlauwers/hakyll-extra/blob/master/src/Hakyll/Translation/Examples/AllLanguages.hs) for a complete example.

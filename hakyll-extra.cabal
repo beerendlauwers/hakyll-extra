@@ -23,6 +23,7 @@ library
                        Hakyll.Translation.Format.Metadata,
                        Hakyll.Translation.Examples.Directories,
                        Hakyll.Translation.Examples.AllLanguages
+                       Hakyll.Translation.Examples.ToJavascript
   build-depends:       base >= 4.7 && < 5,
                        hakyll >= 4.6 && < 4.8,
                        aeson >= 0.7 && < 0.9,

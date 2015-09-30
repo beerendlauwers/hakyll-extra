@@ -36,3 +36,9 @@ This repo can built with [Stack](https://github.com/commercialhaskell/stack#read
 *  `collectMetadataTranslations :: [Metadata] -> [Translation]`: Given a list of metadata, appends them all together and places them in a map-like structure.
 *  `createTranslationContextFromMetaData :: (MonadMetadata m) => Pattern -> Language -> m (Context a)`: Given a pattern and a language, will produce a Context with translations in them for that language. See [Hakyll.Translation.Examples.Directories](https://github.com/beerendlauwers/hakyll-extra/blob/master/src/Hakyll/Translation/Examples/Directories.hs) for a complete example.
 *  `loadAllTranslationsFromMetadata :: (MonadMetadata m) => Pattern -> [Language] -> m ([(Language,[Translation])])`: Given a pattern and a list of languages, will produce a list of (language,translations) tuples. See [Hakyll.Translation.Examples.AllLanguages](https://github.com/beerendlauwers/hakyll-extra/blob/master/src/Hakyll/Translation/Examples/AllLanguages.hs) for a complete example.
+*  
+### Hakyll.Translation.Examples
+
+* `AllLanguages.hs`: Example on how to use the `translationsToContextFunctionField` functionality.
+* `Directories.hs`: Example on how to use the `createTranslationContextFromMetaData` functionality.
+* `ToJavascript.hs` and `processTranslation.js`: Example on how to expose translations to Javascript.

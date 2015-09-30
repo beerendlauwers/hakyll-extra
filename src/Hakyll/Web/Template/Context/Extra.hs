@@ -1,6 +1,7 @@
 module Hakyll.Web.Template.Context.Extra where
 
 import Hakyll
+import Data.Monoid                    (mappend)
 import Data.List                      (isPrefixOf)
 import Control.Applicative            (Alternative (..))
 
@@ -41,3 +42,27 @@ relativizeUrl = functionField "relativizeUrl" $ \args item ->
      where
         isRel x = "/" `isPrefixOf` x && not ("//" `isPrefixOf` x)
         rel x root = if isRel x then root ++ x else x
+        
+-- | A 'Hakyll.Web.Template.Context.functionField' that takes a template path as its first argument, and an unlimited number of named arguments.
+-- It will then load the template and pass the named arguments as template variables.
+-- You can call it in a template like this:
+--
+-- > $applyToTemplate("templates/testing.html","element","testing")$
+--
+-- @"templates/testing.html"@ will now have access to the @$element$@ variable, which will have the value @"testing"@.
+--
+-- Multiple arguments are possible:
+--
+-- > $applyToTemplate("templates/testing.html","element","testing","argumentTwo","arg2")$
+--
+-- @"templates/testing.html"@ will now have access to both the @$element$@ and the @$argumentTwo$@ variables.
+applyToTemplate :: Context a
+applyToTemplate = functionField "applyToTemplate" $ \args item ->
+    case args of
+        (template:arguments) -> let indexedArguments = zip arguments [0..] -- Gives us [("argumentName1",0),("argumentName1Value",1),("argumentName2",2),("argumentName2Value",3)]
+                                    names = map fst . filter (even . snd) $ indexedArguments -- Gives us ["argumentName1","argumentName2"]
+                                    values = map fst . filter (not . even . snd) $ indexedArguments -- Gives us ["argumentName1Value","argumentName2Value"]
+                                    fields = map (\(name,arg) -> constField name arg) (zip names values)
+                                    context = foldl1 mappend fields
+                                in do result <- loadAndApplyTemplate (fromFilePath template) context item
+                                      return (itemBody result)

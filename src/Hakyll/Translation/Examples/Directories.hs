@@ -21,15 +21,15 @@ exampleDirectories = hakyll $ do
     
     -- From here on in, we generate the files for each language.
     forM_ langs $ \lang -> do
+        -- Here, we create the translations.
+        translations <- createTranslationContextFromMetaData "translations/*/*" lang
+        -- Then, we add them to our default context.
+        let langCtx = postCtx <> translations
         -- The fillPattern will change the pattern to something like "content/nl/*".
         match (fillPattern "content/*/*" lang) $ do
             -- We will place a file in a diretory called $lang$
             route $ customRoute ((\f -> lang ++ "/" ++ f) . takeFileName . toFilePath)
             compile $ do
-                -- Here, we create the translations.
-                translations <- createTranslationContextFromMetaData "translations/*/*" lang
-                -- Then, we add them to our default context.
-                let langCtx = postCtx <> translations
                 getResourceBody
                     >>= applyAsTemplate langCtx
                     >>= loadAndApplyTemplate "templates/html.html" langCtx

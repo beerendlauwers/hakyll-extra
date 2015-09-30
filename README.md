@@ -27,8 +27,8 @@ This repo can built with [Stack](https://github.com/commercialhaskell/stack#read
 
 ### Hakyll.Translation
 
-* `translationToContext :: [Translation] -> Context a`: iven a list of translations, builds up a context of fields, one for each translation. The metadata key name is appended with "translation.".
-* `translationsToContextFunctionField :: [(Language,[Translation])] -> Context a`: Given a list of lists of translations, produces a $functionField$ that expects a language and a translation key. You can use it in a template like this: `$translationFor("language","key")$`
+* `translationToContext :: [Translation] -> Context a`: Given a list of translations, builds up a context of fields, one for each translation. The metadata key name is appended with "translation.".
+* `translationsToContextFunctionField :: [(Language,[Translation])] -> Context a`: Given a list of lists of translations, produces a `functionField` that expects a language and a translation key. You can use it in a template like this: `$translationFor("language","key")$`
 
 ### Hakyll.Translation.Format.Metadata
 
